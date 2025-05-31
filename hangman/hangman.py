@@ -1,17 +1,15 @@
-
 def play_hangman():
     
     import random
-
-    list_of_words = ["apple", "banana", "orange", "grape", "kiwi", "mango", "pineapple", "cherry", "watermelon", "strawberry"]
+    from words import data
 
     hangman = [
         """
         +---+
         |   |
         O   |
-    /|\\  |
-    / \\  |
+       /|\  |
+       / \  |
             |
         =========
         """,
@@ -19,8 +17,8 @@ def play_hangman():
         +---+
         |   |
         O   |
-    /|\\  |
-    /    |
+       /|\  |
+       /    |
             |
         =========
         """,
@@ -28,7 +26,7 @@ def play_hangman():
         +---+
         |   |
         O   |
-    /|\\  |
+       /|\  |
             |
             |
         =========
@@ -37,7 +35,7 @@ def play_hangman():
         +---+
         |   |
         O   |
-    /|   |
+       /|
             |
             |
         =========
@@ -85,9 +83,9 @@ def play_hangman():
         +---+
             |
             |
-        \\O/ |
-        |  |
-        / \\ |
+        \O/ |
+         |  |
+        /\  |
         =========
     """
 
@@ -96,7 +94,9 @@ def play_hangman():
 
     while flag:
         
-        word = random.choice(list_of_words)
+        word_bank = random.choice(data)
+        word = word_bank['word']
+        category = word_bank['categories']
         
         lives = 7
         guessed_letters = []
@@ -108,6 +108,7 @@ def play_hangman():
         if play.lower() == "y":
             while lives > 0:
                 print(hangman[lives])
+                print(f"Hint word is a {", ".join(category)}")
                 print()
                 print("Guessed letters:", ", ".join(guessed_letters))
                 print()
